@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './App.css'
 
 
 const Header = (props) => {
@@ -9,17 +10,21 @@ const FeedbackButton = (props) => {
   return (<button onClick = {props.onClick}>{props.name}</button>)
 }
 
+const StatisticLine = (props) => {
+  return (<tr><th>{props.text}</th><th>{props.value}</th></tr>)
+}
+
 const Statistics = (props) => {
   const sum = (props.good + props.neutral + props.bad)
   if (sum)
     return (
-      <li>
-        <p>good {props.good}</p>
-        <p>neutral {props.neutral}</p>
-        <p>bad {props.bad}</p>
-        <p>average {(props.good + props.bad)/sum}</p>
-        <p>positive{props.good/sum}</p>
-      </li>
+      <tbody>
+        <StatisticLine text="good" value={props.good}/>
+        <StatisticLine text="neutral" value={props.neutral}/>
+        <StatisticLine text="bad" value={props.bad}/>
+        <StatisticLine text="average " value={(props.good + props.bad) / sum}/>
+        <StatisticLine text="positive " value={`${props.good / sum}%`}/>
+      </tbody>
     )
   else return <p>No feedback given</p>
 }
