@@ -10,15 +10,18 @@ const FeedbackButton = (props) => {
 }
 
 const Statistics = (props) => {
-  return (
-    <li>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>average {(props.good + props.bad)/(props.good + props.neutral + props.bad)}</p>
-      <p>positive{props.good/(props.good + props.neutral + props.bad)}</p>
-    </li>
-  )
+  const sum = (props.good + props.neutral + props.bad)
+  if (sum)
+    return (
+      <li>
+        <p>good {props.good}</p>
+        <p>neutral {props.neutral}</p>
+        <p>bad {props.bad}</p>
+        <p>average {(props.good + props.bad)/sum}</p>
+        <p>positive{props.good/sum}</p>
+      </li>
+    )
+  else return <p>No feedback given</p>
 }
 
 const App = () => {
